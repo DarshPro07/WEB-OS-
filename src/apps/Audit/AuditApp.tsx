@@ -18,10 +18,6 @@ export default function AuditApp() {
 
         <div>
 
-          <span className="app-kicker">
-            Zero silent actions
-          </span>
-
           <h1>
             Audit
           </h1>
@@ -44,10 +40,6 @@ export default function AuditApp() {
           0 && (
 
           <div className="empty-state">
-
-            <span>
-              ≡
-            </span>
 
             <strong>
               No recorded actions

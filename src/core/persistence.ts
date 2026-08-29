@@ -5,7 +5,7 @@ import type {
 
 
 const STORAGE_KEY =
-  "nexus.os.state.v1";
+  "nexus.os.state.v2";
 
 
 export interface PersistedOSState {

@@ -342,10 +342,6 @@ export default function NotesApp() {
 
         <div>
 
-          <span className="app-kicker">
-            Local workspace
-          </span>
-
           <h1>
             Notes
           </h1>

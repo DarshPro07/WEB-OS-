@@ -49,6 +49,8 @@ import NotesApp from "../apps/Notes/NotesApp";
 
 import SettingsApp from "../apps/Settings/SettingsApp";
 
+import BrowserApp from "../apps/Browser/BrowserApp";
+
 
 function renderApp(
   appId: AppId,
@@ -91,6 +93,12 @@ function renderApp(
     case "settings":
       return (
         <SettingsApp />
+      );
+
+
+    case "browser":
+      return (
+        <BrowserApp />
       );
 
 
@@ -256,10 +264,6 @@ export default function DesktopShell() {
     <main className="desktop">
 
       <div className="wallpaper">
-
-        <div className="wallpaper-glow glow-one" />
-
-        <div className="wallpaper-glow glow-two" />
 
         <div className="wallpaper-noise" />
 

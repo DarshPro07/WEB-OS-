@@ -12,7 +12,7 @@ export default function BootScreen() {
     <main className="boot-screen" aria-label="Starting NEXUS">
       <div className="boot-mark">✦</div>
       <strong>NEXUS</strong>
-      <span>Initializing protected workspace...</span>
+      <span>Loading…</span>
       <div className="boot-progress"><i /></div>
     </main>
   );

@@ -4,18 +4,19 @@ export type AppId =
   | "audit"
   | "system"
   | "notes"
+  | "browser"
   | "settings";
 
 
 export type ThemeMode =
-  | "dark"
-  | "dim";
+  | "light"
+  | "dark";
 
 
 export type AccentName =
-  | "lime"
   | "blue"
-  | "violet";
+  | "amber"
+  | "green";
 
 
 export type PermissionName =

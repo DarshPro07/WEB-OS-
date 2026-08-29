@@ -22,9 +22,9 @@ interface Task {
 
 
 const suggestions = [
-  "Review this workspace",
-  "Check browser security posture",
-  "Show recent system activity",
+  "Open Sentinel and run a scan",
+  "Check what's in the audit log",
+  "List everything running right now",
 ];
 
 
@@ -232,18 +232,13 @@ export default function NexusApp() {
 
       <header className="app-hero">
 
-        <span className="app-kicker">
-          Personal workspace
-        </span>
-
-
         <h1>
-          What do you want to do?
+          Nexus
         </h1>
 
 
         <p>
-          Nexus plans work and requests access before touching protected resources.
+          Plans work and asks before touching anything protected.
         </p>
 
       </header>
@@ -295,7 +290,7 @@ export default function NexusApp() {
               )
           }
 
-          placeholder="Ask Nexus to do something…"
+          placeholder="Type an objective, e.g. check disk usage"
 
           onKeyDown={
             (
@@ -335,8 +330,8 @@ export default function NexusApp() {
             }
           >
             {working
-              ? "…"
-              : "↑"}
+              ? "Working…"
+              : "Run"}
           </button>
 
         </footer>
@@ -365,10 +360,6 @@ export default function NexusApp() {
           0 ? (
 
           <div className="empty-state">
-
-            <span>
-              ✦
-            </span>
 
             <strong>
               No tasks yet

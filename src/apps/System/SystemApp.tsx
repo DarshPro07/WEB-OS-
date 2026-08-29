@@ -1,214 +1,56 @@
-import {
-  useOS,
-} from "../../core/OSContext";
+import { useEffect, useState } from "react";
+import { useOS } from "../../core/OSContext";
 
+function formatBytes(bytes: number) {
+  if (!bytes) return "—";
+  const mb = bytes / (1024 * 1024);
+  return `${mb.toFixed(0)} MB`;
+}
 
-export default function SettingsApp() {
+export default function SystemApp() {
+  const { state } = useOS();
 
-  const {
-    state,
+  const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight });
 
-    setTheme,
+  useEffect(() => {
+    function onResize() {
+      setViewport({ width: window.innerWidth, height: window.innerHeight });
+    }
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
-    setAccent,
+  const perfMemory = (performance as unknown as { memory?: { usedJSHeapSize: number; jsHeapSizeLimit: number } }).memory;
 
-    setReducedMotion,
-  } = useOS();
+  const openWindows = Object.values(state.windows).filter((w) => w.open && !w.minimized).length;
 
+  const rows: Array<[string, string]> = [
+    ["Viewport", `${viewport.width} × ${viewport.height}`],
+    ["Pixel ratio", `${window.devicePixelRatio}x`],
+    ["Platform", navigator.platform || "unknown"],
+    ["Language", navigator.language],
+    ["Online", navigator.onLine ? "yes" : "no"],
+    ["Open windows", String(openWindows)],
+    ["Audit entries", String(state.audit.length)],
+  ];
+
+  if (perfMemory) {
+    rows.push(["JS heap used", formatBytes(perfMemory.usedJSHeapSize)]);
+    rows.push(["JS heap limit", formatBytes(perfMemory.jsHeapSizeLimit)]);
+  }
 
   return (
-
     <div className="app-page">
+      <h1>System</h1>
 
-      <header className="app-hero compact">
-
-        <span className="app-kicker">
-          NEXUS
-        </span>
-
-        <h1>
-          Settings
-        </h1>
-
-      </header>
-
-
-      <section className="settings-card">
-
-        <div className="settings-description">
-
-          <strong>
-            Appearance
-          </strong>
-
-          <span>
-            Choose how the desktop looks.
-          </span>
-
-        </div>
-
-
-        <div className="settings-control">
-
-          <button
-            className={
-              state.settings.theme ===
-              "dark"
-                ? "selected"
-                : ""
-            }
-
-            onClick={() =>
-              setTheme(
-                "dark",
-              )
-            }
-          >
-            Dark
-          </button>
-
-
-          <button
-            className={
-              state.settings.theme ===
-              "dim"
-                ? "selected"
-                : ""
-            }
-
-            onClick={() =>
-              setTheme(
-                "dim",
-              )
-            }
-          >
-            Dim
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <section className="settings-card">
-
-        <div className="settings-description">
-
-          <strong>
-            Accent
-          </strong>
-
-          <span>
-            Used only for important actions.
-          </span>
-
-        </div>
-
-
-        <div className="accent-picker">
-
-          {(
-            [
-              "lime",
-              "blue",
-              "violet",
-            ] as const
-          ).map(
-            (
-              accent,
-            ) => (
-
-              <button
-                key={
-                  accent
-                }
-
-                className={[
-                  "accent-choice",
-
-                  `accent-${accent}`,
-
-                  state.settings.accent ===
-                  accent
-                    ? "selected"
-                    : "",
-                ].join(" ")}
-
-                onClick={() =>
-                  setAccent(
-                    accent,
-                  )
-                }
-              />
-
-            ),
-          )}
-
-        </div>
-
-      </section>
-
-
-      <section className="settings-card">
-
-        <div className="settings-description">
-
-          <strong>
-            Reduced motion
-          </strong>
-
-          <span>
-            Minimize interface animation.
-          </span>
-
-        </div>
-
-
-        <button
-          className={[
-            "switch",
-
-            state.settings.reducedMotion
-              ? "on"
-              : "",
-          ].join(" ")}
-
-          onClick={() =>
-            setReducedMotion(
-              !state.settings
-                .reducedMotion,
-            )
-          }
-        >
-
-          <span />
-
-        </button>
-
-      </section>
-
-
-      <section className="zpp-card">
-
-        <span>
-          ◇
-        </span>
-
-
-        <div>
-
-          <strong>
-            Z++ Policy
-          </strong>
-
-          <p>
-            Protected actions require explicit permission and are written to the audit ledger.
-          </p>
-
-        </div>
-
-      </section>
-
+      <div className="system-rows">
+        {rows.map(([label, value]) => (
+          <div className="system-row" key={label}>
+            <span>{label}</span>
+            <strong>{value}</strong>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

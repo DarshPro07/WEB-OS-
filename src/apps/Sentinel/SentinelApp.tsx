@@ -288,10 +288,6 @@ export default function SentinelApp() {
 
         <div>
 
-          <span className="app-kicker">
-            Defensive security
-          </span>
-
           <h1>
             Sentinel
           </h1>
@@ -348,10 +344,6 @@ export default function SentinelApp() {
           0 && (
 
           <div className="empty-state">
-
-            <span>
-              ◇
-            </span>
 
             <strong>
               Ready to inspect

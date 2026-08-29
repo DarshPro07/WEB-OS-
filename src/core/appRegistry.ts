@@ -165,6 +165,35 @@ export const appRegistry:
   },
 
 
+  browser: {
+    id: "browser",
+
+    name: "Browser",
+
+    description:
+      "Open a site",
+
+    icon: "◎",
+
+    keywords: [
+      "browser",
+      "web",
+      "url",
+      "site",
+      "youtube",
+      "internet",
+    ],
+
+    defaultBounds: {
+      x: 200,
+      y: 70,
+
+      width: 760,
+      height: 560,
+    },
+  },
+
+
   settings: {
     id: "settings",
 

@@ -3,23 +3,24 @@ import { useOS } from "../../core/OSContext";
 
 export default function Dock() {
   const { state, openApp } = useOS();
+  const running = appList.filter((app) => state.windows[app.id].open);
+
   return (
-    <nav className="dock" aria-label="Applications">
+    <nav className="dock" aria-label="Open windows">
       <div className="dock-inner">
-        {appList.map((app) => {
-          const running = state.windows[app.id].open;
-          return (
-            <button
-              className={`dock-app ${state.activeAppId === app.id ? "dock-app-active" : ""}`}
-              key={app.id}
-              onClick={() => openApp(app.id)}
-              aria-label={`Open ${app.name}`}
-            >
-              <span className="dock-icon">{app.icon}</span>
-              {running && <span className="dock-running-dot" />}
-            </button>
-          );
-        })}
+        {running.length === 0 && (
+          <span className="dock-hint">No open windows</span>
+        )}
+        {running.map((app) => (
+          <button
+            className={`dock-app ${state.activeAppId === app.id ? "dock-app-active" : ""}`}
+            key={app.id}
+            onClick={() => openApp(app.id)}
+          >
+            <span className="dock-icon">{app.icon}</span>
+            <span className="dock-label">{app.name}</span>
+          </button>
+        ))}
       </div>
     </nav>
   );

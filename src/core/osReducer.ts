@@ -188,10 +188,10 @@ export function createDefaultState():
 
     settings: {
       theme:
-        "dark",
+        "light",
 
       accent:
-        "lime",
+        "blue",
 
       reducedMotion:
         false,
