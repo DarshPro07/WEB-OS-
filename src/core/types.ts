@@ -19,6 +19,23 @@ export type AccentName =
   | "green";
 
 
+export type WallpaperId =
+  | "dark-thorn-knight"
+  | "aurora"
+  | "ion"
+  | "void"
+  | "custom";
+
+
+export interface WallpaperSettings {
+  id: WallpaperId;
+
+  dim: number;
+
+  blur: number;
+}
+
+
 export type PermissionName =
   | "read:workspace"
   | "security:scan"
@@ -116,6 +133,10 @@ export interface OSSettings {
   accent: AccentName;
 
   reducedMotion: boolean;
+
+  wallpaper: WallpaperSettings;
+
+  widgetsVisible: boolean;
 }
 
 

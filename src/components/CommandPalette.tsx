@@ -5,12 +5,15 @@ import {
   useState,
 } from "react";
 
+import { Search } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
 import type { AppId } from "../core/types";
 
 export type PaletteApp = {
   id: AppId;
   name: string;
-  icon: string;
+  icon: LucideIcon;
   description: string;
   keywords?: string[];
 };
@@ -164,7 +167,10 @@ export default function CommandPalette({
         <div className="palette-search">
 
           <span className="palette-search-icon">
-            ⌕
+            <Search
+              size={15}
+              strokeWidth={1.5}
+            />
           </span>
 
           <input
@@ -211,7 +217,10 @@ export default function CommandPalette({
           )}
 
           {filteredApps.map(
-            (app, index) => (
+            (app, index) => {
+              const Icon = app.icon;
+
+              return (
               <button
                 key={app.id}
                 className={[
@@ -232,7 +241,10 @@ export default function CommandPalette({
                 }
               >
                 <span className="palette-app-icon">
-                  {app.icon}
+                  <Icon
+                    size={16}
+                    strokeWidth={1.5}
+                  />
                 </span>
 
                 <span className="palette-result-copy">
@@ -255,7 +267,8 @@ export default function CommandPalette({
                 )}
 
               </button>
-            ),
+              );
+            },
           )}
 
         </div>

@@ -2,6 +2,11 @@ import {
   useState,
 } from "react";
 
+import {
+  Ban,
+  Check,
+} from "lucide-react";
+
 
 import {
   useOS,
@@ -392,9 +397,17 @@ export default function NexusApp() {
                     className={`task-status ${task.status}`}
                   >
                     {task.status ===
-                    "complete"
-                      ? "✓"
-                      : "×"}
+                    "complete" ? (
+                      <Check
+                        size={13}
+                        strokeWidth={2}
+                      />
+                    ) : (
+                      <Ban
+                        size={13}
+                        strokeWidth={2}
+                      />
+                    )}
                   </span>
 
 

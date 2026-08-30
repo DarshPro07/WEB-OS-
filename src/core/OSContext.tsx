@@ -34,6 +34,7 @@ import type {
   PermissionName,
   PermissionRequest,
   ThemeMode,
+  WallpaperId,
 } from "./types";
 
 
@@ -237,6 +238,14 @@ interface OSContextValue {
     ) => void;
 
 
+  setMaximized:
+    (
+      appId: AppId,
+
+      value: boolean,
+    ) => void;
+
+
   notify:
     (
       options:
@@ -297,6 +306,30 @@ interface OSContextValue {
     (
       value:
         boolean,
+    ) => void;
+
+
+  setWallpaper:
+    (
+      id: WallpaperId,
+    ) => void;
+
+
+  setWallpaperDim:
+    (
+      value: number,
+    ) => void;
+
+
+  setWallpaperBlur:
+    (
+      value: number,
+    ) => void;
+
+
+  setWidgetsVisible:
+    (
+      value: boolean,
     ) => void;
 }
 
@@ -745,6 +778,22 @@ export function OSProvider({
     },
 
 
+    setMaximized(
+      appId,
+      value,
+    ) {
+
+      dispatch({
+        type:
+          "SET_MAXIMIZED",
+
+        appId,
+
+        value,
+      });
+    },
+
+
     notify,
 
 
@@ -821,6 +870,58 @@ export function OSProvider({
       dispatch({
         type:
           "SET_REDUCED_MOTION",
+
+        value,
+      });
+    },
+
+
+    setWallpaper(
+      id,
+    ) {
+
+      dispatch({
+        type:
+          "SET_WALLPAPER",
+
+        id,
+      });
+    },
+
+
+    setWallpaperDim(
+      value,
+    ) {
+
+      dispatch({
+        type:
+          "SET_WALLPAPER_DIM",
+
+        value,
+      });
+    },
+
+
+    setWallpaperBlur(
+      value,
+    ) {
+
+      dispatch({
+        type:
+          "SET_WALLPAPER_BLUR",
+
+        value,
+      });
+    },
+
+
+    setWidgetsVisible(
+      value,
+    ) {
+
+      dispatch({
+        type:
+          "SET_WIDGETS_VISIBLE",
 
         value,
       });

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useOS } from "../../core/OSContext";
 
 const HOME_URL = "https://www.youtube.com";
@@ -83,8 +84,8 @@ export default function BrowserApp() {
     <div className="browser-app">
       <div className="browser-bar">
         <div className="browser-nav">
-          <button aria-label="Back" disabled={!canBack} onClick={back}>‹</button>
-          <button aria-label="Forward" disabled={!canForward} onClick={forward}>›</button>
+          <button aria-label="Back" disabled={!canBack} onClick={back}><ChevronLeft size={16} strokeWidth={1.5} /></button>
+          <button aria-label="Forward" disabled={!canForward} onClick={forward}><ChevronRight size={16} strokeWidth={1.5} /></button>
         </div>
 
         <form

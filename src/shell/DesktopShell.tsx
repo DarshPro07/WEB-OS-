@@ -13,6 +13,10 @@ import {
   useOS,
 } from "../core/OSContext";
 
+import {
+  computeHalfSnapBounds,
+} from "../core/windowSnap";
+
 
 import type {
   AppId,
@@ -30,6 +34,10 @@ import NotificationCenter from "../components/os/NotificationCenter";
 import QuickSettings from "../components/os/QuickSettings";
 
 import PermissionDialog from "../components/os/PermissionDialog";
+
+import WallpaperLayer from "../components/os/WallpaperLayer";
+
+import DesktopWidgets from "../components/os/DesktopWidgets";
 
 
 import MenuBar from "./MenuBar";
@@ -116,6 +124,12 @@ export default function DesktopShell() {
     openApp,
 
     notify,
+
+    moveApp,
+
+    resizeApp,
+
+    setMaximized,
   } = useOS();
 
 
@@ -231,6 +245,81 @@ export default function DesktopShell() {
           false,
         );
       }
+
+
+      if (
+        event.ctrlKey &&
+        event.shiftKey &&
+        state.activeAppId
+      ) {
+
+        const appId =
+          state.activeAppId;
+
+
+        if (
+          event.key ===
+            "ArrowLeft" ||
+          event.key ===
+            "ArrowRight"
+        ) {
+
+          event.preventDefault();
+
+          setMaximized(
+            appId,
+            false,
+          );
+
+          const bounds =
+            computeHalfSnapBounds(
+              event.key ===
+                "ArrowLeft"
+                ? "left"
+                : "right",
+            );
+
+          moveApp(
+            appId,
+            bounds.x,
+            bounds.y,
+          );
+
+          resizeApp(
+            appId,
+            bounds.width,
+            bounds.height,
+          );
+        }
+
+
+        if (
+          event.key ===
+          "ArrowUp"
+        ) {
+
+          event.preventDefault();
+
+          setMaximized(
+            appId,
+            true,
+          );
+        }
+
+
+        if (
+          event.key ===
+          "ArrowDown"
+        ) {
+
+          event.preventDefault();
+
+          setMaximized(
+            appId,
+            false,
+          );
+        }
+      }
     }
 
 
@@ -246,7 +335,12 @@ export default function DesktopShell() {
         keyboard,
       );
 
-  }, []);
+  }, [
+    state.activeAppId,
+    moveApp,
+    resizeApp,
+    setMaximized,
+  ]);
 
 
   if (
@@ -263,11 +357,7 @@ export default function DesktopShell() {
 
     <main className="desktop">
 
-      <div className="wallpaper">
-
-        <div className="wallpaper-noise" />
-
-      </div>
+      <WallpaperLayer />
 
 
       <MenuBar
@@ -309,42 +399,51 @@ export default function DesktopShell() {
 
       <section className="desktop-space">
 
+        <DesktopWidgets />
+
         <div className="desktop-icons">
 
           {appList.map(
             (
               app,
-            ) => (
+            ) => {
 
-              <button
-                key={
-                  app.id
-                }
+              const Icon =
+                app.icon;
 
-                className="desktop-icon"
 
-                onDoubleClick={() =>
-                  openApp(
-                    app.id,
-                  )
-                }
-              >
+              return (
 
-                <span>
-                  {
-                    app.icon
+                <button
+                  key={
+                    app.id
                   }
-                </span>
 
-                <small>
-                  {
-                    app.name
+                  className="desktop-icon"
+
+                  onDoubleClick={() =>
+                    openApp(
+                      app.id,
+                    )
                   }
-                </small>
+                >
 
-              </button>
+                  <span>
+                    <Icon
+                      size={20}
+                      strokeWidth={1.5}
+                    />
+                  </span>
 
-            ),
+                  <small>
+                    {
+                      app.name
+                    }
+                  </small>
+
+                </button>
+              );
+            },
           )}
 
         </div>

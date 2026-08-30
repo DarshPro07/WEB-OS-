@@ -503,30 +503,6 @@ textarea:focus-visible {
 }
 
 
-.quick-settings-glyph {
-
-  width:
-    12px;
-
-  height:
-    12px;
-
-  border-radius:
-    50%;
-
-  border:
-    1.5px solid
-    currentColor;
-
-  background:
-    linear-gradient(
-      90deg,
-      currentColor 50%,
-      transparent 50%
-    );
-}
-
-
 .clock-button {
 
   height:
@@ -925,86 +901,6 @@ textarea:focus-visible {
 
   background:
     #c5434b;
-}
-
-
-.minimize-symbol {
-
-  width:
-    9px;
-
-  height:
-    1px;
-
-  background:
-    currentColor;
-}
-
-
-.maximize-symbol {
-
-  width:
-    9px;
-
-  height:
-    9px;
-
-  border:
-    1px solid
-    currentColor;
-}
-
-
-.close-symbol {
-
-  position:
-    relative;
-
-  width:
-    10px;
-
-  height:
-    10px;
-}
-
-
-.close-symbol::before,
-.close-symbol::after {
-
-  content:
-    "";
-
-  position:
-    absolute;
-
-  top:
-    4px;
-
-  left:
-    0;
-
-  width:
-    10px;
-
-  height:
-    1px;
-
-  background:
-    currentColor;
-}
-
-
-.close-symbol::before {
-
-  transform:
-    rotate(45deg);
-}
-
-
-.close-symbol::after {
-
-  transform:
-    rotate(-45deg);
 }
 
 
@@ -4134,4 +4030,192 @@ textarea:focus-visible {
   padding: 0 6px;
   color: var(--text-3);
   font-size: 12px;
+}
+
+/* Icons — Lucide, 1.5 stroke, currentColor, never scaled by font-size */
+
+.menu-brand,
+.window-icon,
+.palette-app-icon,
+.palette-search-icon,
+.permission-note > span,
+.task-status,
+.finding-indicator,
+.window-controls button,
+.browser-nav button,
+.side-panel-header button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-brand {
+  gap: 6px;
+}
+
+.window-icon,
+.palette-app-icon {
+  color: var(--text-2);
+}
+
+.palette-search-icon,
+.permission-note > span {
+  color: var(--text-3);
+}
+
+.command-trigger {
+  color: var(--text-3);
+}
+
+.command-trigger > span {
+  flex: 1;
+  color: var(--text-2);
+}
+
+svg {
+  flex: none;
+}
+
+/* Wallpaper engine */
+
+.wallpaper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(120% 120% at 50% 15%, transparent 45%, rgba(0, 0, 0, 0.5) 100%);
+  pointer-events: none;
+}
+
+.wallpaper-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wallpaper-gradient {
+  background-size: cover;
+}
+
+.wallpaper-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #000;
+  transition: opacity 200ms ease;
+}
+
+.wallpaper-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.wallpaper-choice {
+  height: 64px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background-color: var(--surface-soft);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.wallpaper-choice > span {
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 11px;
+}
+
+.wallpaper-choice.selected {
+  border-color: var(--accent);
+}
+
+.wallpaper-upload {
+  background-image: none !important;
+  border: 1px dashed var(--line-strong);
+  align-items: center;
+  justify-content: center;
+}
+
+.wallpaper-upload > span {
+  background: transparent;
+  color: var(--text-2);
+  padding: 0;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+/* Window snap + resize */
+
+.os-window-snap-hint {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.window-resize-handle::after {
+  content: "";
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 8px;
+  height: 8px;
+  background-image: repeating-linear-gradient(135deg, var(--line-strong) 0 1px, transparent 1px 3px);
+}
+
+/* Desktop widgets */
+
+.desktop-widget {
+  position: absolute;
+  z-index: 5;
+  left: 20px;
+  bottom: 20px;
+  padding: 10px 14px;
+  pointer-events: none;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.desktop-widget-time {
+  display: block;
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.desktop-widget-date {
+  display: block;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.desktop-widget-divider {
+  width: 28px;
+  height: 1px;
+  margin: 8px 0;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.desktop-widget-pulse {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+}
+
+@media (max-width: 850px) {
+  .desktop-widget {
+    display: none;
+  }
 }

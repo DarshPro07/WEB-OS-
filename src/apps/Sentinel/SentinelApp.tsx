@@ -2,6 +2,11 @@ import {
   useState,
 } from "react";
 
+import {
+  Check,
+  TriangleAlert,
+} from "lucide-react";
+
 
 import {
   useOS,
@@ -375,9 +380,17 @@ export default function SentinelApp() {
                 className={`finding-indicator ${finding.status}`}
               >
                 {finding.status ===
-                "pass"
-                  ? "✓"
-                  : "!"}
+                "pass" ? (
+                  <Check
+                    size={13}
+                    strokeWidth={2}
+                  />
+                ) : (
+                  <TriangleAlert
+                    size={13}
+                    strokeWidth={2}
+                  />
+                )}
               </span>
 
 

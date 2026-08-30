@@ -11,16 +11,19 @@ export default function Dock() {
         {running.length === 0 && (
           <span className="dock-hint">No open windows</span>
         )}
-        {running.map((app) => (
-          <button
-            className={`dock-app ${state.activeAppId === app.id ? "dock-app-active" : ""}`}
-            key={app.id}
-            onClick={() => openApp(app.id)}
-          >
-            <span className="dock-icon">{app.icon}</span>
-            <span className="dock-label">{app.name}</span>
-          </button>
-        ))}
+        {running.map((app) => {
+          const Icon = app.icon;
+          return (
+            <button
+              className={`dock-app ${state.activeAppId === app.id ? "dock-app-active" : ""}`}
+              key={app.id}
+              onClick={() => openApp(app.id)}
+            >
+              <span className="dock-icon"><Icon size={16} strokeWidth={1.5} /></span>
+              <span className="dock-label">{app.name}</span>
+            </button>
+          );
+        })}
       </div>
     </nav>
   );

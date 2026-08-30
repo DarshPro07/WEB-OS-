@@ -1,3 +1,4 @@
+import { X } from "lucide-react";
 import { useOS } from "../../core/OSContext";
 
 interface Props { open: boolean; onClose: () => void; }
@@ -7,7 +8,7 @@ export default function NotificationCenter({ open, onClose }: Props) {
   if (!open) return null;
   return (
     <aside className="side-panel" role="dialog" aria-label="Notifications">
-      <header className="side-panel-header"><div><strong>Notifications</strong><span>{state.notifications.length} events</span></div><button onClick={onClose} aria-label="Close">×</button></header>
+      <header className="side-panel-header"><div><strong>Notifications</strong><span>{state.notifications.length} events</span></div><button onClick={onClose} aria-label="Close"><X size={14} strokeWidth={1.5} /></button></header>
       <div className="panel-actions"><button onClick={markAllNotificationsRead}>Mark all read</button><button onClick={clearNotifications}>Clear</button></div>
       <div className="notification-list">
         {state.notifications.length === 0 && <div className="command-empty">No notifications</div>}

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useOS } from "../core/OSContext";
+import NexusMark from "../components/NexusMark";
 
 export default function BootScreen() {
   const { completeBoot } = useOS();
@@ -10,7 +11,7 @@ export default function BootScreen() {
 
   return (
     <main className="boot-screen" aria-label="Starting NEXUS">
-      <div className="boot-mark">✦</div>
+      <div className="boot-mark"><NexusMark size={30} /></div>
       <strong>NEXUS</strong>
       <span>Loading…</span>
       <div className="boot-progress"><i /></div>

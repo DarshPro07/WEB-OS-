@@ -1,3 +1,17 @@
+import {
+  ClipboardList,
+  Compass,
+  FileText,
+  Gauge,
+  ShieldCheck,
+  SlidersHorizontal,
+  Workflow,
+} from "lucide-react";
+
+import type {
+  LucideIcon,
+} from "lucide-react";
+
 import type {
   AppId,
   WindowBounds,
@@ -11,7 +25,7 @@ export interface AppDefinition {
 
   description: string;
 
-  icon: string;
+  icon: LucideIcon;
 
   keywords: string[];
 
@@ -34,7 +48,7 @@ export const appRegistry:
     description:
       "Agent workspace",
 
-    icon: "✦",
+    icon: Workflow,
 
     keywords: [
       "agent",
@@ -62,7 +76,7 @@ export const appRegistry:
     description:
       "Security posture",
 
-    icon: "◇",
+    icon: ShieldCheck,
 
     keywords: [
       "security",
@@ -90,7 +104,7 @@ export const appRegistry:
     description:
       "System activity",
 
-    icon: "≡",
+    icon: ClipboardList,
 
     keywords: [
       "logs",
@@ -118,7 +132,7 @@ export const appRegistry:
     description:
       "Runtime information",
 
-    icon: "⌁",
+    icon: Gauge,
 
     keywords: [
       "performance",
@@ -146,7 +160,7 @@ export const appRegistry:
     description:
       "Local notes",
 
-    icon: "□",
+    icon: FileText,
 
     keywords: [
       "notes",
@@ -173,7 +187,7 @@ export const appRegistry:
     description:
       "Open a site",
 
-    icon: "◎",
+    icon: Compass,
 
     keywords: [
       "browser",
@@ -202,7 +216,7 @@ export const appRegistry:
     description:
       "NEXUS preferences",
 
-    icon: "⚙",
+    icon: SlidersHorizontal,
 
     keywords: [
       "settings",
@@ -216,7 +230,7 @@ export const appRegistry:
       y: 115,
 
       width: 560,
-      height: 500,
+      height: 620,
     },
   },
 };

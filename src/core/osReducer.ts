@@ -10,6 +10,7 @@ import type {
   PermissionRequest,
   ThemeMode,
   AuditEntry,
+  WallpaperId,
 } from "./types";
 
 
@@ -124,6 +125,37 @@ export type OSAction =
         "SET_REDUCED_MOTION";
 
       value: boolean;
+    }
+
+  | {
+      type: "SET_MAXIMIZED";
+      appId: AppId;
+
+      value: boolean;
+    }
+
+  | {
+      type: "SET_WALLPAPER";
+
+      id: WallpaperId;
+    }
+
+  | {
+      type: "SET_WALLPAPER_DIM";
+
+      value: number;
+    }
+
+  | {
+      type: "SET_WALLPAPER_BLUR";
+
+      value: number;
+    }
+
+  | {
+      type: "SET_WIDGETS_VISIBLE";
+
+      value: boolean;
     };
 
 
@@ -195,6 +227,15 @@ export function createDefaultState():
 
       reducedMotion:
         false,
+
+      wallpaper: {
+        id: "dark-thorn-knight",
+        dim: 45,
+        blur: 0,
+      },
+
+      widgetsVisible:
+        true,
     },
 
     bootComplete:
@@ -524,6 +565,92 @@ export function osReducer(
           ...state.settings,
 
           reducedMotion:
+            action.value,
+        },
+      };
+
+
+    case "SET_MAXIMIZED":
+      return {
+        ...state,
+
+        windows: {
+          ...state.windows,
+
+          [action.appId]: {
+            ...state.windows[
+              action.appId
+            ],
+
+            maximized:
+              action.value,
+
+            minimized:
+              false,
+          },
+        },
+      };
+
+
+    case "SET_WALLPAPER":
+      return {
+        ...state,
+
+        settings: {
+          ...state.settings,
+
+          wallpaper: {
+            ...state.settings.wallpaper,
+
+            id:
+              action.id,
+          },
+        },
+      };
+
+
+    case "SET_WALLPAPER_DIM":
+      return {
+        ...state,
+
+        settings: {
+          ...state.settings,
+
+          wallpaper: {
+            ...state.settings.wallpaper,
+
+            dim:
+              action.value,
+          },
+        },
+      };
+
+
+    case "SET_WALLPAPER_BLUR":
+      return {
+        ...state,
+
+        settings: {
+          ...state.settings,
+
+          wallpaper: {
+            ...state.settings.wallpaper,
+
+            blur:
+              action.value,
+          },
+        },
+      };
+
+
+    case "SET_WIDGETS_VISIBLE":
+      return {
+        ...state,
+
+        settings: {
+          ...state.settings,
+
+          widgetsVisible:
             action.value,
         },
       };
