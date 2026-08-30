@@ -1,53 +1,50 @@
-# NEXUS // Z++
+# Nexus
 
-Phase 1 scaffold for an agentic, cyber-defense-focused WebOS.
+An OS desktop running in a browser tab. Draggable windows, three themes, and an agent that has to ask for permission before doing anything.
 
-## What is implemented
+I built it because every demo of every "AI OS" I saw gave the agent the ability to do things first and inform the user about it afterward. I wanted the reverse. The agent has to go through a permission request before it does anything, and any action that gets taken goes into an audit ledger you can scroll through. There is no off-the-record stuff here.
 
-- React + TypeScript + Vite
-- Draggable desktop windows
-- NEXUS / MATRIX / NITRO visual modes
-- Safe agent-objective simulator
-- Z++ permission model scaffold
-- Sentinel defensive security panel
-- Append-only-style in-memory audit ledger
-- System telemetry panel
+## Components
 
-## Z++ concept
+The desktop: draggable windows, a taskbar, and three visual modes (NEXUS, MATRIX, and NITRO).
 
-For this project:
+The component that took most of my time to build:
 
-- Zero Trust
-- Zero Exposure
-- Zero Silent Actions
+- a permission model the agent has to pass before taking an action,
+- the security panel to see what actions are currently permitted,
+- the audit ledger to keep track of the actions in chronological order,
+- the agent simulator which drives everything in the frontend until a real model is wired in.
 
-This is a project architecture/branding concept, not an established security standard.
+Z++ is just my name for three rules the OS was built around. Zero trust, zero exposure, zero silent actions. This is not a security standard and I am not trying to invent one.
 
-## Run
+## Run it
 
-```bash
+```
 npm install
 npm run dev
 ```
 
-Then open the local URL Vite prints.
+Go to the URL printed by Vite.
 
-## Phase 2
+**Clicking an icon twice opens a window.** Single click is what you would expect, but it is the very first thing I want to change.
 
-Build these next:
+Live version: https://web-os-ten-red.vercel.app/
 
-1. Window open/close/minimize/maximize manager
-2. Command palette
-3. Persistent audit ledger with IndexedDB
-4. Real read-only browser security checks
-5. Cyber Lab with harmless simulated incidents
-6. Permission approval modal
-7. Agent planning graph
-8. Keyboard shortcuts
-9. Mobile/responsive improvements
-10. GitHub Pages deployment
+## Working features
 
-## Safety design
+Windows, dragging, the three modes, the permission flow, the security panel, the audit ledger.
 
-The current agent simulator does not execute arbitrary shell commands or access secrets.
-Later integrations should remain permission-gated and defensive.
+## Not working
+
+- There is no actual model driving the agent. It is a simulator which creates plausible actions so I could test the permission layer against something.
+- Everything is ephemeral. Refresh and get a blank desktop.
+- Window manager becomes confused when there is a large number of windows and the order of their stacking and focus become inconsistent. Not fixed.
+- Not usable on mobile. I have not checked.
+
+## Technologies used
+
+React, TypeScript, Vite. No backend. Everything is running in the tab.
+
+## Phase 1 vs. phase 2
+
+I wanted to have the shell and the permission layer done before wiring a real model in. Letting a model click things in the frontend was the easier half of the project. Ensuring that it cannot do it silently
