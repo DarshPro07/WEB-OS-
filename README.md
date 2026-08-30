@@ -44,7 +44,3 @@ Windows, dragging, the three modes, the permission flow, the security panel, the
 ## Technologies used
 
 React, TypeScript, Vite. No backend. Everything is running in the tab.
-
-## Phase 1 vs. phase 2
-
-I wanted to have the shell and the permission layer done before wiring a real model in. Letting a model click things in the frontend was the easier half of the project. Ensuring that it cannot do it silently
